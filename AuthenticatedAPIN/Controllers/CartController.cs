@@ -2,66 +2,62 @@ using AuthenticatedAPIN.Data;
 using AuthLibrary;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore; // If not already added
 
-namespace AuthenticatedAPIN.Controllers;
-[Authorize]
-[ApiController]
-[Route("[controller]/[action]")]
-public class CartController : ControllerBase
+namespace AuthenticatedAPIN.Controllers
 {
-  private readonly databaseContext _DbContext;
-
-    public CartController(ILogger<CartController> logger, databaseContext DbContext)
+    [Authorize]
+    [ApiController]
+    [Route("[controller]/[action]")]
+    public class CartController : ControllerBase
     {
-        _DbContext = DbContext;
-    }
+        private readonly databaseContext _DbContext;
 
-[HttpGet]
-    public async Task<List<ItemModel>?> GetUserItem()
-    {
-        var user = User.Identity?.Name ?? string.Empty;
-
-        var cart = await _DbContext.Carts.Where(cart => cart.User == user).FirstOrDefaultAsync();
-return cart?.ItemList;
-    }
-  [HttpPost]
-    public async Task<IActionResult> DeleteUserItem(int id)
-    {
-        var user = User.Identity?.Name ?? string.Empty;
-
-        var cart = await _DbContext.Carts.Where(cart => cart.User == user).FirstOrDefaultAsync();
-
-        cart?.ItemList.RemoveAll(Item => Item.Id == id);
-
-        await _DbContext.SaveChangesAsync();
-
-        return Ok();
-    }
-    [HttpPost]
-    public async Task<IActionResult> CreateUserItem(int id)
-    {
-        var user = User.Identity?.Name ?? string.Empty;
-
-        var cart = await _DbContext.Carts.Where(cart => cart.User == user).FirstOrDefaultAsync();
-
-        if (cart is null)
+        public CartController(ILogger<CartController> logger, databaseContext DbContext)
         {
-            _DbContext.Add(new CartModel()
+            _DbContext = DbContext;
+        }
+
+        [HttpGet]
+        public async Task<List<ItemModel>?> GetUserItem()
+        {
+            var user = User.Identity?.Name ?? string.Empty;
+            var cart = await _DbContext.ShoppingCart.Where(ShopCart => ShopCart.User == user).FirstOrDefaultAsync();
+            return cart?.ItemList;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUserItem(int id)
+        {
+            var user = User.Identity?.Name ?? string.Empty;
+            var cart = await _DbContext.ShoppingCart.Where(ShopCart => ShopCart.User == user).FirstOrDefaultAsync();
+            cart?.ItemList.RemoveAll(item => item.Id == id);
+            await _DbContext.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUserItem(int id)
+        {
+            var user = User.Identity?.Name ?? string.Empty;
+            var cart = await _DbContext.ShoppingCart.Where(ShopCart => ShopCart.User == user).FirstOrDefaultAsync();
+
+            if (cart is null)
             {
-                User = user,
-                ItemList = [new Item()
-                {Id = id}]
-            });
+                _DbContext.Add(new ShoppingCart()
+                {
+                    User = user,
+                    ItemList = new List<ItemModel> { new ItemModel { Id = id } }
+                });
+            }
+            else
+            {
+                cart.ItemList.Add(new ItemModel() { Id = id });
+            }
+
+            await _DbContext.SaveChangesAsync();
+            return Ok();
         }
- else
-        {
-            cart.ItemList.Add(new Item() { Id = id });
-        }
-
-        await _DbContext.SaveChangesAsync();
-
-        return Ok();
-}
-
+    }
 }

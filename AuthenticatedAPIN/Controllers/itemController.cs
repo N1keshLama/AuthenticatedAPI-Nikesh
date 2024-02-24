@@ -1,4 +1,4 @@
-using AuthenticatedAPIN.Database;
+using AuthenticatedAPIN.Data;
 using AuthLibrary;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,21 +18,21 @@ public class itemController : ControllerBase
 [HttpGet]
 public IActionResult GetAllitems()
 {
-    return Ok(_DbContext.items);
+    return Ok(_DbContext.Item);
 }
 [HttpGet]
 public IActionResult GetitemsByCategory(int categoryId)
 {
-    var itemsInCategory = _DbContext.items.Where(p => p.itemCategory.Id == categoryId).ToList();
+    var itemsInCategory = _DbContext.Item.Where(p => p.ItemCategory.Id == categoryId).ToList();
     return Ok(itemsInCategory);
 }
 [HttpPost]
-public IActionResult Additem(Item item){
+public IActionResult Additem(ItemModel item){
     if(item == null)
     {
         return BadRequest();
     }
-    _DbContext.items.Add(item);
+    _DbContext.Item.Add(item);
     _DbContext.SaveChanges();
     return Ok(item);
 }
