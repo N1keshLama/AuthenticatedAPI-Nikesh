@@ -1,0 +1,6 @@
+@AuthenticatedAPIN_HostAddress = http://localhost:5229
+
+GET {{AuthenticatedAPIN_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

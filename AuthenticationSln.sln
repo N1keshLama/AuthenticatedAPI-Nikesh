@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticatedAPIN", "AuthenticatedAPIN\AuthenticatedAPIN.csproj", "{14136AC4-EE64-4EE9-89C6-30AEB8EFBAEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingAuthentication", "TestingAuthentication\TestingAuthentication.csproj", "{39FDE652-6E90-4E6E-BDC0-EB4276BEE8A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthLibrary", "AuthLibrary\AuthLibrary.csproj", "{A79AEF4C-3A74-4BB9-84CD-B3FABBF7A71C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14136AC4-EE64-4EE9-89C6-30AEB8EFBAEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14136AC4-EE64-4EE9-89C6-30AEB8EFBAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14136AC4-EE64-4EE9-89C6-30AEB8EFBAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14136AC4-EE64-4EE9-89C6-30AEB8EFBAEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39FDE652-6E90-4E6E-BDC0-EB4276BEE8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39FDE652-6E90-4E6E-BDC0-EB4276BEE8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39FDE652-6E90-4E6E-BDC0-EB4276BEE8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39FDE652-6E90-4E6E-BDC0-EB4276BEE8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A79AEF4C-3A74-4BB9-84CD-B3FABBF7A71C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A79AEF4C-3A74-4BB9-84CD-B3FABBF7A71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A79AEF4C-3A74-4BB9-84CD-B3FABBF7A71C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A79AEF4C-3A74-4BB9-84CD-B3FABBF7A71C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
